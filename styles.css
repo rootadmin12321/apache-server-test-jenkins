@@ -1,0 +1,80 @@
+/* Reset default margin & padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Full-screen animated background */
+.background-animation {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1e3c72, #2a5298);
+    background-size: 400% 400%;
+    animation: bgMove 10s infinite linear;
+    z-index: -1;
+}
+
+/* Background movement animation */
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Centered Content */
+.container {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+/* Heading Animation */
+.fade-in {
+    font-size: 3rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Paragraph Animation */
+.slide-up {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: slideUp 2s forwards 1s;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated Button */
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+.button:hover {
+    background: white;
+    color: #ff416c;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
