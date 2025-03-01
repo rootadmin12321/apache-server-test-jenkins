@@ -3,100 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Webpage</title>
-    
+    <title>Interactive Animated Website</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     <style>
-        /* Reset default margin & padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* General Styling */
+        body {
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
         }
 
-        /* Full-screen animated background */
-        .background-animation {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1e3c72, #2a5298);
-            background-size: 400% 400%;
-            animation: bgMove 10s infinite linear;
-            z-index: -1;
+        /* Navbar */
+        .navbar {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9) !important;
         }
 
-        /* Background movement animation */
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Centered Content */
-        .container {
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://source.unsplash.com/1600x900/?technology') center/cover;
+            color: white;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
         }
-
-        /* Heading Animation */
-        .fade-in {
+        .hero h1 {
             font-size: 3rem;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Paragraph Animation */
-        .slide-up {
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: slideUp 2s forwards 1s;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Animated Button */
-        .button {
+        /* Typing Effect */
+        .typing {
             display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            color: white;
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px solid white;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: 0.5s ease;
+            border-right: 3px solid white;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
-        .button:hover {
-            background: white;
-            color: #ff416c;
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        /* Counter */
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Gallery */
+        .gallery img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery img:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Back to Top */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="background-animation"></div>
-    
-    <div class="container">
-        <h1 class="fade-in">Welcome to the Future</h1>
-        <p class="slide-up">Experience mesmerizing animations with pure CSS!</p>
-        <a href="#" class="button">Explore More</a>
-    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Welcome to <span class="typing"></span></h1>
+        <p class="lead">Awesome animations using HTML, CSS, Bootstrap, and jQuery</p>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We create modern web solutions with amazing animations.</p>
+        </div>
+    </section>
+
+    <!-- Services Section with Counters -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p>We offer professional web design, development, and animations.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="counter" data-target="500">0</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="counter" data-target="1200">0</h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="counter" data-target="15">0</h3>
+                    <p>Years of Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section bg-light">
+        <div class="container">
+            <h2>Gallery</h2>
+            <div class="row gallery">
+                <div class="col-md-4"><img src="https://source.unsplash.com/400x300/?nature" alt="Gallery Image"></div>
+                <div class="col-md-4"><img src="https://source.unsplash.com/400x300/?city" alt="Gallery Image"></div>
+                <div class="col-md-4"><img src="https://source.unsplash.com/400x300/?tech" alt="Gallery Image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <p id="formMessage"></p>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 My Website | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Typing Effect
+        let text = "My Animated Website";
+        let index = 0;
+        function type() {
+            document.querySelector(".typing").textContent = text.substring(0, index++);
+            if (index <= text.length) setTimeout(type, 100);
+        }
+        type();
+
+        // Navbar Scroll Effect
+        $(window).scroll(() => {
+            $(".navbar").toggleClass("scrolled", $(this).scrollTop() > 50);
+        });
+
+        // Counter Animation
+        $(".counter").each(function () {
+            let $this = $(this);
+            let target = $this.attr("data-target");
+            $({ count: 0 }).animate({ count: target }, {
+                duration: 2000,
+                step: function () {
+                    $this.text(Math.floor(this.count));
+                }
+            });
+        });
+
+        // Form Validation
+        $("#contactForm").submit((e) => {
+            e.preventDefault();
+            $("#formMessage").text("Thank you for contacting us!");
+        });
+    </script>
 </body>
 </html>
